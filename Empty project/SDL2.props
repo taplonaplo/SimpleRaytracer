@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <SDL2_LibDir>$(SolutionDir)\libs\SDL2-2.0.4\lib\x86</SDL2_LibDir>
+    <SDL2_IncludeDir>$(SolutionDir)\libs\SDL2-2.0.4\include</SDL2_IncludeDir>
+  </PropertyGroup>
+  <PropertyGroup>
+    <IncludePath>$(SDL2_IncludeDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SDL2_LibDir)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="SDL2_LibDir">
+      <Value>$(SDL2_LibDir)</Value>
+    </BuildMacro>
+    <BuildMacro Include="SDL2_IncludeDir">
+      <Value>$(SDL2_IncludeDir)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
