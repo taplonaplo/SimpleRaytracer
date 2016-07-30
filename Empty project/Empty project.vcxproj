@@ -129,6 +129,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="SDLRenderer.h" />
     <ClInclude Include="SDLRenderTarget.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="Shape.h" />

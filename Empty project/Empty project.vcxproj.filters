@@ -44,5 +44,8 @@
     <ClInclude Include="Scene.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="SDLRenderer.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
