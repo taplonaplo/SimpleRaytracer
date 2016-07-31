@@ -137,6 +137,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="main.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Ray.h" />
     <ClInclude Include="Renderer.h" />

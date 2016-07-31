@@ -8,7 +8,8 @@ Raytracer::Raytracer(RenderTarget * renderTarget)
 		glm::vec3(0.f, 500.f, 0.f),
 		glm::vec3(0.f),
 		glm::vec3(0.f, 0.f, 1.f),
-		glm::vec3(1.f, 0.f, 0.f)
+		glm::vec3(1.f, 0.f, 0.f),
+		60.f
 	);
 }
 
@@ -23,10 +24,7 @@ void Raytracer::Render()
 	int width = renderTarget->getWidth();
 	int height = renderTarget->getHeight();
 
-	camera->eye += glm::vec3(0.f, 0.f, 10.f);
-	camera->lookAt += glm::vec3(0.f, 0.f, 10.f);
-
-#pragma omp parallel for num_threads(4) 
+	#pragma omp parallel for num_threads(4) 
 	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)

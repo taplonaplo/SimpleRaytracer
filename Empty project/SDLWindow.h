@@ -3,9 +3,11 @@
 #include <stdio.h>
 
 #include "SDLRenderer.h"
+
 class Window
 {
 public:
+	virtual bool HandleEvent() = 0;
 	virtual bool IsValid() const = 0;
 	virtual void Invalidate() = 0;
 };
@@ -23,5 +25,5 @@ public:
 	~SDLWindow();
 	virtual bool IsValid() const;
 	virtual void Invalidate();
-
+	virtual bool HandleEvent();
 };
