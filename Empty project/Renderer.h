@@ -3,49 +3,36 @@
 #include "Scene.h"
 #include "Camera.h"
 
+#include "Material.h"
+#include "Ray.h"
+
 class Renderer
 {
 public:
 	virtual void Render() = 0;
 };
 
-class SoftwareRenderer : public Renderer
+
+#define ITERATION_LIMIT 5
+
+class Raytracer : public Renderer
 {
 protected:
 	RenderTarget* renderTarget;
 	Scene* scene;
 	Camera* camera;
+
+	glm::vec3 TraceRay(const Ray & ray, int iterations);
+
+	glm::vec3 ShadePoint(const IntersectionRecord& record, const Ray& ray, int iterations);
+	glm::vec3 ShadeDiffuse(const IntersectionRecord& record);
+	glm::vec3 CalculateDirectLighting(const PointLight & light, IntersectionRecord surfceRecord);
+	glm::vec3 ShadeReflective(const IntersectionRecord & surfaceRecord, const Ray & ray, int iterations);
+	glm::vec3 ShadeRefractive(const IntersectionRecord & surfaceRecord, const Ray & ray, int iterations);
+
 public:
-	SoftwareRenderer(RenderTarget* renderTarget)
-		: renderTarget(renderTarget)
-	{ 
-		scene = new Scene();
-		camera = new Camera(
-			glm::vec3(0.f, 500.f, 0.f),
-			glm::vec3(0.f),
-			glm::vec3(0.f, 0.f, 1.f),
-			glm::vec3(1.f, 0.f, 0.f)
-		);
-	}
-	SoftwareRenderer()
-	{
-		delete scene;
-	}
+	Raytracer(RenderTarget* renderTarget);
+	~Raytracer();
 
-	virtual void Render()
-	{
-		int width = renderTarget->getWidth();
-		int height = renderTarget->getHeight();
-	
-		for (int i = 0; i < width; i++)
-		{
-			for (int j = 0; j < height; j++)
-			{
-				Ray ray = camera->GetRay(i, j, width, height);
-				glm::vec3 color = scene->TraceRay(ray, 0);
-
-				renderTarget->storePixel(i, j, glm::vec4(color.r, color.g, color.b, 1.0f));
-			}
-		}
-	}
+	virtual void Render();
 };

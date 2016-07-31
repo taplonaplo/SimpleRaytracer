@@ -1,6 +1,6 @@
 #include "Sphere.h"
 
-bool Sphere::Intersect(const Ray & ray, IntersectionRecord & intersectionRecord)
+bool Sphere::Intersect(const Ray & ray, IntersectionRecord & intersectionRecord) const
 {
 	// Use the quadratic formula to calculate the distance to the intersection point:
 	//	(ray.origin + distance * ray.dir - sphere.center)^2 - sphere.radius^2 = 0;
@@ -30,7 +30,7 @@ bool Sphere::Intersect(const Ray & ray, IntersectionRecord & intersectionRecord)
 
 Material* Sphere::GetMaterial() const { return material; }
 
-bool Sphere::CheckAndRecordIntersection(IntersectionRecord & intersectionRecord, const Ray & ray, float distance)
+bool Sphere::CheckAndRecordIntersection(IntersectionRecord & intersectionRecord, const Ray & ray, float distance) const
 {
 	if (distance > MIN_RAY_DIST && distance < intersectionRecord.distance)
 	{
@@ -40,7 +40,7 @@ bool Sphere::CheckAndRecordIntersection(IntersectionRecord & intersectionRecord,
 	return false;
 }
 
-void Sphere::RecordIntersection(IntersectionRecord & intersectionRecord, const Ray & ray, float distance)
+void Sphere::RecordIntersection(IntersectionRecord & intersectionRecord, const Ray & ray, float distance) const
 {
 	intersectionRecord.distance = distance;
 	intersectionRecord.intersectionPoint = ray.origin + ray.dir * distance;
@@ -48,7 +48,7 @@ void Sphere::RecordIntersection(IntersectionRecord & intersectionRecord, const R
 	intersectionRecord.material = material;
 }
 
-glm::vec3 Sphere::GetNormal(glm::vec3 pos)
+glm::vec3 Sphere::GetNormal(glm::vec3 pos) const
 {
 	return glm::normalize(pos - this->pos);
 }

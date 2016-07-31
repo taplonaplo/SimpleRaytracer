@@ -33,7 +33,7 @@ public:
 		}
 
 		renderTarget = new SDLRenderTarget(width, height, 4, frameworkTarget);
-		sceneRenderer = new SoftwareRenderer(renderTarget);
+		sceneRenderer = new Raytracer(renderTarget);
 	}
 	~SDLWindowRenderer()
 	{

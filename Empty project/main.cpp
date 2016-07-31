@@ -14,7 +14,20 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 	window.Invalidate();
-
-	getchar();
+	SDL_Event event;
+	bool running = true;
+	while (running)
+	{
+		if (SDL_WaitEvent(&event))
+		{
+			switch (event.type)
+			{
+			case SDL_QUIT:
+				printf("SDL_QUIT signal received");
+				running = false;
+			}
+		}
+		
+	}
 	return 0;
 }

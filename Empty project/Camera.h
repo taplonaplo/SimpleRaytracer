@@ -4,7 +4,7 @@
 #include "Ray.h"
 class Camera
 {
-private:
+public:
 	glm::vec3 eye;
 	glm::vec3 lookAt;
 	glm::vec3 up;
