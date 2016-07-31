@@ -19,6 +19,10 @@ public:
 	{ 
 		scene = new Scene();
 	}
+	SoftwareRenderer()
+	{
+		delete scene;
+	}
 
 	virtual void Render()
 	{

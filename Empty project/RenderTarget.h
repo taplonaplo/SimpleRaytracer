@@ -31,8 +31,8 @@ public:
 	
 	void storePixel(int x, int y, glm::vec4 color)
 	{
-		int offset = y * width * pixelSize + x * pixelSize;
-		glm::vec4 clampedColor = glm::clamp(color, glm::vec4(0.f), glm::vec4(0.99f));
+		int offset = (height - y) * width * pixelSize + x * pixelSize;
+		glm::vec4 clampedColor = glm::clamp(color, glm::vec4(0.f), glm::vec4(0.999f));
 		clampedColor *= 256;
 		pixelBuffer[offset] = (uint8_t)clampedColor.r;
 		pixelBuffer[offset + 1] = (uint8_t)clampedColor.g;

@@ -2,4 +2,3 @@
 class Shape {
 	bool intersect() { return false; }
 };
-

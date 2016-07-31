@@ -36,7 +36,7 @@ SDLWindow::~SDLWindow()
 
 bool const SDLWindow::IsValid()
 {
-	return window != NULL;// && renderer != NULL;
+	return window != NULL;
 }
 
 #include "Renderer.h"
