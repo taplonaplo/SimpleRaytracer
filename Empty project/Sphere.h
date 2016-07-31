@@ -12,7 +12,6 @@ private:
 
 	bool CheckAndRecordIntersection(IntersectionRecord& intersectionRecord, const Ray& ray, float distance) const;
 	void RecordIntersection(IntersectionRecord& intersectionRecord, const Ray& ray, float distance) const;
-	glm::vec3 GetNormal(glm::vec3 pos) const;
 public:
 	Sphere(float radius, glm::vec3 pos, Material* material)
 		: radius(radius)
@@ -23,4 +22,5 @@ public:
 	// Calculate up to 2 intersection points with the sphere, and return the closer one if it exists.
 	bool Intersect(const Ray& ray, IntersectionRecord& intersectionRecord) const;
 	Material* GetMaterial() const;
+	glm::vec3 GetNormal(glm::vec3 pos) const;
 };

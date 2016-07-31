@@ -1,7 +1,5 @@
 #pragma once
 #include "glm/glm.hpp"
-
-// to avoid self shadowing
 #define MIN_RAY_DIST 0.01f
 
 struct Ray {

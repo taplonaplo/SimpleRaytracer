@@ -24,8 +24,6 @@ public:
 	glm::vec3 GetDiffuse() const { return diffuseColor; }
 };
 
-
-
 class ReflectiveMaterial : public Material
 {
 private:
@@ -62,23 +60,10 @@ class RefractiveMaterial : public Material
 private:
 	float averageRefractiveIndex;
 	glm::vec3 fresnel0;
-	glm::vec3 Fresnel0(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient)
-	{
-		return ((refractiveIndex - glm::vec3(1)) * (refractiveIndex - glm::vec3(1)) 
-						+ extinctionCoefficient * extinctionCoefficient)
-			/ ((refractiveIndex + glm::vec3(1)) * (refractiveIndex + glm::vec3(1))
-				+ extinctionCoefficient * extinctionCoefficient);
-	}
+	glm::vec3 Fresnel0(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient);
 public:
-	RefractiveMaterial(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient)
-	{ 
-		averageRefractiveIndex = glm::dot(refractiveIndex, glm::vec3(1)) / 3.f;
-		fresnel0 = Fresnel0(refractiveIndex, extinctionCoefficient);
-	}
-	virtual RefractiveModel GetRefractiveModel(const Ray& ray, const IntersectionRecord& surfaceRecord)
-	{
-		return RefractiveModel(ray, surfaceRecord, this);
-	}
+	RefractiveMaterial(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient);
+	virtual RefractiveModel GetRefractiveModel(const Ray& ray, const IntersectionRecord& surfaceRecord);
 	virtual float GetRefractiveIndex() const { return averageRefractiveIndex; }
 	virtual glm::vec3 GetFresnel0() const { return fresnel0; }
 	virtual bool IsRefractive() const { return true; }

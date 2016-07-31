@@ -12,7 +12,7 @@ SDLWindow::SDLWindow(const char * title, int width, int height)
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 	}
 
-	window = SDL_CreateWindow("window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
+	window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_OPENGL);
 
 	if (window == NULL) {
 		printf("Could not create window: %s\n", SDL_GetError());
@@ -22,26 +22,22 @@ SDLWindow::SDLWindow(const char * title, int width, int height)
 	renderer = new SDLWindowRenderer(window, width, height);
 
 	context = SDL_GL_CreateContext(window);
-	
-	printf("SDL window created\n");
 }
 
 SDLWindow::~SDLWindow()
 {
+	delete renderer;
 	SDL_GL_DeleteContext(context);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-	printf("SDL window destroyed\n");
 }
 
-bool const SDLWindow::IsValid()
+bool SDLWindow::IsValid() const
 {
 	return window != NULL;
 }
 
-#include "Renderer.h"
-void const SDLWindow::Invalidate()
+void SDLWindow::Invalidate()
 {
 	renderer->Invalidate();
 }
-

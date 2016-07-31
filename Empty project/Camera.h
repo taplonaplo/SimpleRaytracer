@@ -18,8 +18,8 @@ public:
 	{ }
 	Ray GetRay(int x, int y, int width, int height)
 	{
-		float yOffset = 2.f * (y - height / 2)/* / (float)(height - 1)*/;
-		float xOffset = 2.f * (x - width / 2)/* / (float)(width - 1)*/;
+		float yOffset = 2.f * (y - height / 2);
+		float xOffset = 2.f * (x - width / 2);
 		glm::vec3 target = (lookAt + up * yOffset + right * xOffset) - eye;
 		return Ray(eye, glm::normalize(target));
 	}

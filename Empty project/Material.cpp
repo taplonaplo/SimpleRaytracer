@@ -27,3 +27,22 @@ RefractiveModel::RefractiveModel(const Ray & ray, const IntersectionRecord & sur
 	glm::vec3 reflectiveDirection = glm::reflect(incident, surfaceNormal);
 	reflectedRay = Ray(surfaceRecord.intersectionPoint + surfaceNormal * 0.1f, reflectiveDirection);
 }
+
+glm::vec3 RefractiveMaterial::Fresnel0(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient)
+{
+	return ((refractiveIndex - glm::vec3(1)) * (refractiveIndex - glm::vec3(1))
+		+ extinctionCoefficient * extinctionCoefficient)
+		/ ((refractiveIndex + glm::vec3(1)) * (refractiveIndex + glm::vec3(1))
+			+ extinctionCoefficient * extinctionCoefficient);
+}
+
+RefractiveMaterial::RefractiveMaterial(glm::vec3 refractiveIndex, glm::vec3 extinctionCoefficient)
+{
+	averageRefractiveIndex = glm::dot(refractiveIndex, glm::vec3(1)) / 3.f;
+	fresnel0 = Fresnel0(refractiveIndex, extinctionCoefficient);
+}
+
+RefractiveModel RefractiveMaterial::GetRefractiveModel(const Ray & ray, const IntersectionRecord & surfaceRecord)
+{
+	return RefractiveModel(ray, surfaceRecord, this);
+}

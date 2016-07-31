@@ -12,9 +12,10 @@ void SDLRenderTarget::BlitTexture32(uint8_t * pixels)
 {
 	for (int i = 0; i < height * width * pixelSize; i += pixelSize)
 	{
-		pixels[i] = pixelBuffer[i + 3];		// A
-		pixels[i + 1] = pixelBuffer[i + 2]; // B
-		pixels[i + 2] = pixelBuffer[i + 1];	// G
-		pixels[i + 3] = pixelBuffer[i];		// R
+		// SDL buffer stores the pixels in ABGR
+		pixels[i] = pixelBuffer[i + 3];
+		pixels[i + 1] = pixelBuffer[i + 2];
+		pixels[i + 2] = pixelBuffer[i + 1];
+		pixels[i + 3] = pixelBuffer[i];
 	}
 }

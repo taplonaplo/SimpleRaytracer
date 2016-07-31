@@ -22,8 +22,8 @@ void Raytracer::Render()
 	int width = renderTarget->getWidth();
 	int height = renderTarget->getHeight();
 
-	camera->eye += glm::vec3(0.f, 0.f, 1.f);
-	camera->lookAt += glm::vec3(0.f, 0.f, 1.f);
+	camera->eye += glm::vec3(0.f, 0.f, 10.f);
+	camera->lookAt += glm::vec3(0.f, 0.f, 10.f);
 	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)

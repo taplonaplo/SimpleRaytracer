@@ -1,6 +1,7 @@
 #pragma once
 #include "SDL.h"
 #include "Renderer.h"
+#include "SDLRenderTarget.h"
 
 class WindowRenderer
 {
@@ -10,8 +11,8 @@ public:
 class SDLWindowRenderer : public WindowRenderer
 {
 private:
-	SDL_Renderer* frameworkRenderer;
-	SDL_Texture* frameworkTarget;
+	SDL_Renderer* windowRenderer;
+	SDL_Texture* windowTarget;
 
 	Renderer* sceneRenderer;
 	RenderTarget* renderTarget;
@@ -23,36 +24,36 @@ public:
 		: width(width)
 		, height(height)	
 	{
-		frameworkRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		windowRenderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-		frameworkTarget = SDL_CreateTexture(frameworkRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
-		if (frameworkTarget == NULL)
+		windowTarget = SDL_CreateTexture(windowRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+		if (windowTarget == NULL)
 		{
 			printf("Could not create texture for window: %s\n", SDL_GetError());
 			return;
 		}
 
-		renderTarget = new SDLRenderTarget(width, height, 4, frameworkTarget);
+		renderTarget = new SDLRenderTarget(width, height, 4, windowTarget);
 		sceneRenderer = new Raytracer(renderTarget);
 	}
+
 	~SDLWindowRenderer()
 	{
 		delete sceneRenderer;
 		delete renderTarget;
-		SDL_DestroyTexture(frameworkTarget);
-		SDL_DestroyRenderer(frameworkRenderer);
+		SDL_DestroyTexture(windowTarget);
+		SDL_DestroyRenderer(windowRenderer);
 	}
 
 	virtual void Invalidate()
 	{
-		SDL_SetRenderDrawColor(frameworkRenderer, 0, 0, 0, 255);
-		SDL_RenderClear(frameworkRenderer);
+		SDL_SetRenderDrawColor(windowRenderer, 0, 0, 0, 255);
+		SDL_RenderClear(windowRenderer);
 
 		sceneRenderer->Render();
 		renderTarget->UploadTexture();
 
-		SDL_RenderCopy(frameworkRenderer, frameworkTarget, NULL, NULL);
-		SDL_RenderPresent(frameworkRenderer);
+		SDL_RenderCopy(windowRenderer, windowTarget, NULL, NULL);
+		SDL_RenderPresent(windowRenderer);
 	}
-
 };
