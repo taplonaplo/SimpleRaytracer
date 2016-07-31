@@ -1,8 +1,9 @@
 /Empty project.VC.db
 /Empty project.VC.VC.opendb
 /Empty project/Debug
-/Empty project/Rlease
-/Libs
+/Empty project/Release
 /Debug
 /Release
-/Empty project/Release/Empty project.tlog
+.vs
+/bin/SimpleRaytracerRelease.ipdb
+/bin/SimpleRaytracerRelease.iobj
