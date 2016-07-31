@@ -1,5 +1,6 @@
 #pragma once
 #include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "Ray.h"
 class Camera
 {
@@ -15,8 +16,11 @@ public:
 		, up(up)
 		, right(right)
 	{ }
-	Ray GetRay()
+	Ray GetRay(int x, int y, int width, int height)
 	{
-		//glm::mat4 lookAt = glm::lookAt();
+		float yOffset = 2.f * (y - height / 2)/* / (float)(height - 1)*/;
+		float xOffset = 2.f * (x - width / 2)/* / (float)(width - 1)*/;
+		glm::vec3 target = (lookAt + up * yOffset + right * xOffset) - eye;
+		return Ray(eye, glm::normalize(target));
 	}
 };

@@ -5,7 +5,7 @@
 #include "Ray.h"
 #include "Sphere.h"
 #include "Light.h"
-#include "Camera.h"
+
 #include <ctime>
 
 #define ITERATION_LIMIT 5

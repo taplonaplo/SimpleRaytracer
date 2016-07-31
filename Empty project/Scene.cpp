@@ -20,13 +20,14 @@ void Scene::InitializeMaterials()
 
 void Scene::InitializeObjects()
 {
-	spheres.push_back(Sphere(60.f, glm::vec3(320.f, 0.f, 180.f), materials[1]));
+	spheres.push_back(Sphere(60.f, glm::vec3(-60.f, -40.f, -180.f), materials[1]));
+	spheres.push_back(Sphere(100.f, glm::vec3(150.f, -100.f, -140.f), materials[1]));
 
-	spheres.push_back(Sphere(100000.f, glm::vec3(320.f, 0.f, -100000.f + 120.f), materials[2]));
-	spheres.push_back(Sphere(100000.f, glm::vec3(320.f, 0.f, +100000.f +360.f), materials[3]));
-	spheres.push_back(Sphere(100000.f, glm::vec3(-100000.f + 120.f, 0.f, 240.f), materials[4]));
-	spheres.push_back(Sphere(100000.f, glm::vec3(+100000.f + 520.f, 0.f, 240.f), materials[5]));
-	//spheres.push_back(Sphere(100000.f, glm::vec3(320.f, -100000.f -500.f, 240.f), materials[6]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, 0.f, -100000.f - 240.f), materials[2]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, 0.f, +100000.f + 240.f), materials[3]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(-100000.f - 240.f, 0.f, 0.f), materials[4]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(+100000.f + 240.f, 0.f, 0.f), materials[5]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, -100000.f -240.f, 0.f), materials[6]));
 	/*for (int i = 0; i < 20; ++i)
 	{
 		spheres.push_back(Sphere(RAND01 * 10.f + 25.f, glm::vec3(RAND01 * 640, 0, RAND01 * 480), materials[i + 1]));
@@ -35,7 +36,7 @@ void Scene::InitializeObjects()
 
 void Scene::InitializeLights()
 {
-	lights.push_back(PointLight(glm::vec3(320.f, 0.f, 300.f), glm::vec3(10000.f, 10000.f, 10000.f)));
+	lights.push_back(PointLight(glm::vec3(0.f, 0.f, 80.f), glm::vec3(10000.f, 10000.f, 10000.f)));
 }
 IntersectionRecord Scene::FindNearestIntersection(const Ray & ray)
 {
@@ -94,22 +95,16 @@ glm::vec3 Scene::ShadeDiffuse(const IntersectionRecord & record, const Ray & ray
 			glm::vec3 lightDirection = light.GetLightDirection(surfacePoint);
 			Ray shadowRay = Ray(surfacePoint + surfaceNormal * 0.1f, lightDirection);
 
-			float weight = glm::clamp(dot(surfaceNormal, lightDirection), 0.f, 1.f);
-			if (weight > 0.5 && weight < 0.6)
-				int sajt = 1;
-
 			IntersectionRecord shadowRecord = FindNearestIntersection(shadowRay);
 			float lightDistance = light.GetDistance(surfacePoint);
 			if (shadowRecord.distance > lightDistance )
 			{
 				float weight = glm::clamp(dot(surfaceNormal, lightDirection), 0.f, 1.f);
-				if (weight > 0.5)
-					int sajt = 1;
-				//float weight = dot(surfaceNormal, lightDirection);
 				glm::vec3 power = light.GetPower(lightDistance);
 				lightContribution += diffuseColor * weight * power;
 			}
 		}
+
 		glm::vec3 ambientColor = diffuseColor * 0.5f;
 		lightContribution += ambientColor;
 		
