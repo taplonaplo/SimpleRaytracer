@@ -18,7 +18,7 @@ SDLWindow::SDLWindow(const char * title, int width, int height)
 		printf("Could not create window: %s\n", SDL_GetError());
 		return;
 	}
-	
+
 	renderer = new SDLWindowRenderer(window, width, height);
 
 	context = SDL_GL_CreateContext(window);

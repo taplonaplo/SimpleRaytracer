@@ -7,7 +7,7 @@ int main(int argc, char* argv[]) {
 	{
 		return 1;
 	}
-	
+
 	bool running = true;
 	while (running)
 	{

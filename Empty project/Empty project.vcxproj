@@ -102,6 +102,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <OpenMPSupport>true</OpenMPSupport>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -128,6 +129,7 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SDLRenderer.cpp" />
     <ClCompile Include="SDLRenderTarget.cpp" />
     <ClCompile Include="SDLWindow.cpp" />
     <ClCompile Include="Sphere.cpp" />
@@ -144,7 +146,6 @@
     <ClInclude Include="SDLRenderTarget.h" />
     <ClInclude Include="SDLWindow.h" />
     <ClInclude Include="Sphere.h" />
-    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

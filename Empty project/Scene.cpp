@@ -7,11 +7,20 @@ Scene::Scene()
 	InitializeLights();
 }
 
+Scene::~Scene()
+{
+	for (std::vector<Material*>::const_iterator it = materials.begin(); it != materials.end(); it++)
+	{
+		delete *it;
+	}
+	materials.clear();
+}
+
 void Scene::InitializeMaterials()
 {
 	materials.push_back(new DiffuseMaterial(glm::vec3(1.f)));
 	materials.push_back(new ReflectiveMaterial(glm::vec3(0.9f, 0.9f, 0.9f)));
-	materials.push_back(new RefractiveMaterial(glm::vec3(1.5f),glm::vec3(0.f)));
+	materials.push_back(new RefractiveMaterial(glm::vec3(1.5f), glm::vec3(0.f)));
 
 	materials.push_back(new DiffuseMaterial(glm::vec3(0.75f, 0.5f, 0.5f)));
 	materials.push_back(new DiffuseMaterial(glm::vec3(0.5f, 0.5f, 0.75f)));
@@ -27,7 +36,7 @@ void Scene::InitializeObjects()
 	spheres.push_back(Sphere(100000.f, glm::vec3(+100000.f + 240.f, 0.f, 0.f), materials[4]));
 	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, 0.f, -100000.f - 240.f), materials[5]));
 	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, 0.f, +100000.f + 240.f), materials[5]));
-	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, -100000.f -240.f, 0.f), materials[5]));
+	spheres.push_back(Sphere(100000.f, glm::vec3(0.f, -100000.f - 240.f, 0.f), materials[5]));
 }
 
 void Scene::InitializeLights()

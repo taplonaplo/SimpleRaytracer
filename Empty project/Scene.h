@@ -20,6 +20,7 @@ private:
 
 public:
 	Scene();
+	~Scene();
 	IntersectionRecord FindNearestIntersection(const Ray & ray);
 	const std::vector<PointLight>& GetLights() const { return lights; }
 };

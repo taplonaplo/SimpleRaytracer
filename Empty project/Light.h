@@ -11,23 +11,9 @@ public:
 		: position(position)
 		, power(power)
 	{ }
-	glm::vec3 GetPosition() const
-	{
-		return position;
-	}
 
-	float GetDistance(glm::vec3 surfacePoint) const
-	{
-		return glm::length(surfacePoint - position);
-	}
-
-	glm::vec3 GetLightDirection(glm::vec3 surfacePoint) const
-	{
-		return glm::normalize(position - surfacePoint);
-	}
-
-	glm::vec3 GetPower(float distance) const
-	{
-		return power / (distance * distance);
-	}
+	float GetDistance(glm::vec3 surfacePoint) const { return glm::length(surfacePoint - position); }
+	glm::vec3 GetPosition() const { return position; }
+	glm::vec3 GetLightDirection(glm::vec3 surfacePoint) const { return glm::normalize(position - surfacePoint); }
+	glm::vec3 GetPower(float distance) const { return power / (distance * distance); }
 };

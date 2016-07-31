@@ -12,6 +12,7 @@ struct Ray {
 		this->dir = glm::normalize(dir);
 	}
 };
+
 class Material;
 struct IntersectionRecord
 {

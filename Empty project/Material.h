@@ -46,7 +46,9 @@ private:
 	Ray reflectedRay;
 	Ray refractedRay;
 public:
+	// Use Snell's law and the Fresnel equation with Schlick approximation to calculate the refractive values
 	RefractiveModel(const Ray& ray, const IntersectionRecord& surfaceRecord, const RefractiveMaterial* material);
+
 	bool HasReflection() { return glm::dot(reflectiveCoefficient, glm::vec3(1.f)) > 0.f; }
 	bool HasRefraction() { return glm::dot(refractiveCoefficient, glm::vec3(1.f)) > 0.f; }
 	Ray GetReflectedRay() { return reflectedRay; }

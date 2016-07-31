@@ -1,17 +1,21 @@
 #pragma once
-#include "Window.h"
 #include <SDL.h>
 #include <stdio.h>
 
 #include "SDLRenderer.h"
+class Window
+{
+public:
+	virtual bool IsValid() const = 0;
+	virtual void Invalidate() = 0;
+};
 
-// SDLWindow with OpenGL
 class SDLWindow : public Window {
 private:
 	SDL_Window* window;
 	WindowRenderer* renderer;
 	SDL_GLContext context;
-	
+
 	int width;
 	int height;
 public:
@@ -19,5 +23,5 @@ public:
 	~SDLWindow();
 	virtual bool IsValid() const;
 	virtual void Invalidate();
-	
+
 };

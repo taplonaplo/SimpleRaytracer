@@ -15,6 +15,7 @@ Raytracer::Raytracer(RenderTarget * renderTarget)
 Raytracer::~Raytracer()
 {
 	delete scene;
+	delete camera;
 }
 
 void Raytracer::Render()
@@ -24,6 +25,8 @@ void Raytracer::Render()
 
 	camera->eye += glm::vec3(0.f, 0.f, 10.f);
 	camera->lookAt += glm::vec3(0.f, 0.f, 10.f);
+
+#pragma omp parallel for num_threads(4) 
 	for (int i = 0; i < width; i++)
 	{
 		for (int j = 0; j < height; j++)
@@ -140,18 +143,21 @@ glm::vec3 Raytracer::ShadeRefractive(const IntersectionRecord & surfaceRecord, c
 	{
 		glm::vec3 lightContribution;
 		RefractiveModel model = ((RefractiveMaterial*)surfaceRecord.material)->GetRefractiveModel(ray, surfaceRecord);
+
 		if (model.HasReflection())
 		{
 			Ray reflectedRay = model.GetReflectedRay();
 			glm::vec3 reflectiveCoefficient = model.GetReflectiveCoefficient();
 			lightContribution += reflectiveCoefficient * TraceRay(reflectedRay, iterations + 1);
 		}
+
 		if (model.HasRefraction())
 		{
 			Ray refractedRay = model.GetRefractedRay();
 			glm::vec3 refractiveCoefficient = model.GetRefractiveCoefficient();
 			lightContribution += refractiveCoefficient * TraceRay(refractedRay, iterations + 1);
 		}
+
 		return lightContribution;
 	}
 }

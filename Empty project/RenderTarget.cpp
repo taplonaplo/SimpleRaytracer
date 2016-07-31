@@ -1,5 +1,20 @@
 #include "RenderTarget.h"
 
+RenderTarget::RenderTarget(int width, int height, int pixelSize)
+	: pixelBuffer(NULL)
+	, width(width)
+	, height(height)
+	, pixelSize(pixelSize)
+	, pitch(width * pixelSize)
+{
+	pixelBuffer = (new uint8_t[width * height * pixelSize]);
+}
+
+RenderTarget::~RenderTarget()
+{
+	delete[] pixelBuffer;
+}
+
 void RenderTarget::storePixel(int x, int y, glm::vec4 color)
 {
 	int offset = ((height - 1) - y) * width * pixelSize + x * pixelSize;
