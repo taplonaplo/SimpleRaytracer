@@ -42,7 +42,7 @@ public:
 			for (int j = 0; j < height; j++)
 			{
 				Ray ray = camera->GetRay(i, j, width, height);
-				glm::vec3 color = scene->TraceRay(ray, 5);
+				glm::vec3 color = scene->TraceRay(ray, 0);
 
 				renderTarget->storePixel(i, j, glm::vec4(color.r, color.g, color.b, 1.0f));
 			}

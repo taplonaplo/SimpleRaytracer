@@ -7,14 +7,14 @@
 struct Ray {
 	glm::vec3 origin;
 	glm::vec3 dir;
-
+	Ray() { }
 	Ray(glm::vec3 origin, glm::vec3 dir)
 		: origin(origin)
 	{
 		this->dir = glm::normalize(dir);
 	}
 };
-
+class Material;
 struct IntersectionRecord
 {
 	float distance;
